@@ -45,3 +45,32 @@ nav a:hover,nav a.active{color:var(--accent)}
 .prose{color:var(--muted)} .prose p{margin-bottom:12px}
 .foot{text-align:center;color:var(--muted);padding:28px;font-size:.85rem;border-top:1px solid var(--line)}
 @media(max-width:520px){.stats{grid-template-columns:1fr}}
+
+/* ---- enhancements: planet modal, orbit + reveal animations ---- */
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float3d{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+.title,.sub,.orrery,.detail{opacity:0;animation:riseIn .6s ease both}
+.sub{animation-delay:.08s}.orrery{animation-delay:.16s}.detail{animation-delay:.24s}
+.planet{opacity:0;animation:riseIn .5s ease both}
+.planet .ball{transition:transform .25s,box-shadow .25s}
+.planet:hover .ball{transform:scale(1.12);box-shadow:0 0 26px rgba(122,162,255,.5)}
+.q{opacity:0;animation:riseIn .5s ease both}
+.q:nth-child(2){animation-delay:.06s}.q:nth-child(3){animation-delay:.12s}.q:nth-child(4){animation-delay:.18s}
+.opt{transition:transform .12s,border-color .15s,background .2s}
+.opt:hover{transform:translateX(4px)}
+.planet-bd{position:fixed;inset:0;background:rgba(2,3,10,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999;opacity:0;transition:opacity .25s}
+.planet-bd.show{opacity:1}
+.planet-dialog{background:rgba(15,20,36,.95);border:1px solid var(--line);border-radius:20px;max-width:600px;width:100%;display:grid;grid-template-columns:200px 1fr;gap:10px;padding:26px;position:relative;animation:pIn .3s cubic-bezier(.2,.9,.3,1) both;overflow:hidden}
+.pvis{position:relative;display:grid;place-items:center;min-height:200px}
+.pball{width:110px;height:110px;border-radius:50%;box-shadow:0 0 40px rgba(122,162,255,.3);animation:float3d 4s ease-in-out infinite;z-index:1}
+.porbit{position:absolute;width:180px;height:180px;border:1px dashed rgba(122,162,255,.3);border-radius:50%;animation:spin 18s linear infinite}
+.porbit::after{content:'';position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:#cfe0ff;box-shadow:0 0 10px #cfe0ff}
+.pinfo{padding:6px 4px}
+.ptag{color:var(--accent);font-size:.85rem}
+.planet-dialog h2{font-size:1.8rem;margin:4px 0 10px}
+.pdesc{color:var(--muted);margin-bottom:18px;line-height:1.55}
+.px{position:absolute;top:14px;right:16px;background:var(--bg);border:1px solid var(--line);color:var(--txt);width:34px;height:34px;border-radius:50%;font-size:1.4rem;cursor:pointer;z-index:3}
+@media(max-width:560px){.planet-dialog{grid-template-columns:1fr}.pvis{min-height:150px}}
